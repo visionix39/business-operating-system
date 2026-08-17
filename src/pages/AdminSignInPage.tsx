@@ -47,11 +47,11 @@ export function AdminSignInPage() {
           </header>
 
           <form className="auth-form" onSubmit={submit}>
-            <div className="auth-demo-hint">
+            {/* <div className="auth-demo-hint">
               <strong>Demo access</strong>
               <span>{DEMO_ADMIN.email}</span>
               <span>{DEMO_ADMIN.password}</span>
-            </div>
+            </div> */}
 
             <div className="field">
               <label htmlFor="admin-signin-email">Email</label>
