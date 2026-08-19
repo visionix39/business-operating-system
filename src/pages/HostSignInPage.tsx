@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
-import { DEMO_HOST, roleHome, useAuth } from '../context/AuthContext'
+import { roleHome, useAuth } from '../context/AuthContext'
+//import { DEMO_HOST } from '../context/AuthContext'
 
 export function HostSignInPage() {
   const { user, signInHost } = useAuth()

@@ -251,7 +251,7 @@ export function roleHome(role: UserRole) {
 }
 
 /** Demo credentials shown on the role sign-in pages */
-export const DEMO_ADMIN = {
+/* export const DEMO_ADMIN = {
   email: DEFAULT_ADMIN.email,
   password: DEFAULT_ADMIN.password,
 }
@@ -265,3 +265,4 @@ export const DEMO_GUEST = {
   email: DEFAULT_GUEST.email,
   password: DEFAULT_GUEST.password,
 }
+ */
