@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { roleHome, useAuth } from '../context/AuthContext'
+//import { DEMO_HOST } from '../context/AuthContext'
 
 export function HostSignInPage() {
   const { user, signInHost } = useAuth()
@@ -45,6 +46,12 @@ export function HostSignInPage() {
           </header>
 
           <form className="auth-form" onSubmit={submit}>
+            {/* <div className="auth-demo-hint">
+              <strong>Demo access</strong>
+              <span>{DEMO_HOST.email}</span>
+              <span>{DEMO_HOST.password}</span>
+            </div> */}
+
             <div className="field">
               <label htmlFor="host-signin-email">Email</label>
               <input
@@ -52,7 +59,7 @@ export function HostSignInPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
+                placeholder="host@portico.demo"
                 autoComplete="email"
                 required
               />

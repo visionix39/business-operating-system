@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
-import { DEMO_ADMIN, roleHome, useAuth } from '../context/AuthContext'
+import { roleHome, useAuth } from '../context/AuthContext'
+//import { DEMO_ADMIN } from '../context/AuthContext'
 
 export function AdminSignInPage() {
   const { user, signInAdmin } = useAuth()
@@ -47,11 +48,11 @@ export function AdminSignInPage() {
           </header>
 
           <form className="auth-form" onSubmit={submit}>
-            <div className="auth-demo-hint">
+            {/* <div className="auth-demo-hint">
               <strong>Demo access</strong>
               <span>{DEMO_ADMIN.email}</span>
               <span>{DEMO_ADMIN.password}</span>
-            </div>
+            </div> */}
 
             <div className="field">
               <label htmlFor="admin-signin-email">Email</label>

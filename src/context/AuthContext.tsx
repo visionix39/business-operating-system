@@ -50,23 +50,46 @@ const DEFAULT_ADMIN: StoredUser = {
   createdAt: '2024-01-01T00:00:00.000Z',
 }
 
+const DEFAULT_HOST: StoredUser = {
+  id: 'host-1',
+  name: 'Portico Host',
+  email: 'host@portico.demo',
+  password: 'host123',
+  role: 'host',
+  createdAt: '2024-01-01T00:00:00.000Z',
+}
+
+const DEFAULT_GUEST: StoredUser = {
+  id: 'guest-1',
+  name: 'Portico Guest',
+  email: 'guest@portico.demo',
+  password: 'guest123',
+  role: 'guest',
+  createdAt: '2024-01-01T00:00:00.000Z',
+}
+
+const DEFAULT_USERS = [DEFAULT_ADMIN, DEFAULT_HOST, DEFAULT_GUEST]
+
+function ensureDefaultUsers(users: StoredUser[]) {
+  const missing = DEFAULT_USERS.filter(
+    (demo) => !users.some((u) => u.role === demo.role && u.email === demo.email),
+  )
+  if (missing.length === 0) return users
+  const next = [...users, ...missing]
+  localStorage.setItem(USERS_KEY, JSON.stringify(next))
+  return next
+}
+
 function readUsers(): StoredUser[] {
   try {
     const raw = localStorage.getItem(USERS_KEY)
     if (!raw) {
-      const seeded = [DEFAULT_ADMIN]
-      localStorage.setItem(USERS_KEY, JSON.stringify(seeded))
-      return seeded
+      localStorage.setItem(USERS_KEY, JSON.stringify(DEFAULT_USERS))
+      return DEFAULT_USERS
     }
-    const parsed = JSON.parse(raw) as StoredUser[]
-    if (!parsed.some((u) => u.role === 'admin' && u.email === DEFAULT_ADMIN.email)) {
-      const withAdmin = [...parsed, DEFAULT_ADMIN]
-      localStorage.setItem(USERS_KEY, JSON.stringify(withAdmin))
-      return withAdmin
-    }
-    return parsed
+    return ensureDefaultUsers(JSON.parse(raw) as StoredUser[])
   } catch {
-    return [DEFAULT_ADMIN]
+    return DEFAULT_USERS
   }
 }
 
@@ -227,8 +250,19 @@ export function roleHome(role: UserRole) {
   return homeForRole(role)
 }
 
-/** Demo credentials shown on the admin sign-in page */
-export const DEMO_ADMIN = {
+/** Demo credentials shown on the role sign-in pages */
+/* export const DEMO_ADMIN = {
   email: DEFAULT_ADMIN.email,
   password: DEFAULT_ADMIN.password,
 }
+
+export const DEMO_HOST = {
+  email: DEFAULT_HOST.email,
+  password: DEFAULT_HOST.password,
+}
+
+export const DEMO_GUEST = {
+  email: DEFAULT_GUEST.email,
+  password: DEFAULT_GUEST.password,
+}
+ */
